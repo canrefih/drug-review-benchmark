@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from src.data import prepare_frame, make_clean_unseen_test, normalize_review_text
+from src.data import make_clean_unseen_test, normalize_review_text, prepare_frame
 
 
 def test_prepare_frame_filters_conditions_and_drops_missing():

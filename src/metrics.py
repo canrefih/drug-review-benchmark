@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
@@ -25,7 +24,7 @@ def evaluate(model, x_test, y_test, labels: list[str]) -> tuple[dict, pd.DataFra
         "weighted_f1": float(f1_score(y_test, predictions, average="weighted", zero_division=0)),
         "macro_precision": float(precision_score(y_test, predictions, average="macro", zero_division=0)),
         "macro_recall": float(recall_score(y_test, predictions, average="macro", zero_division=0)),
-        "n_test": int(len(y_test)),
+        "n_test": len(y_test),
     }
     report = classification_report(
         y_test, predictions, labels=labels, output_dict=True, zero_division=0

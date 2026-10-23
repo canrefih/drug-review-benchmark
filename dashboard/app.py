@@ -3,13 +3,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 import streamlit as st
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-from src.dashboard_results import load_result_summary, is_comparable_run
+from src.dashboard_results import is_comparable_run, load_result_summary
 
 st.set_page_config(
     page_title="Drug Review NLP Benchmark",

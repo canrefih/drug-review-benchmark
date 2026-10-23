@@ -1,10 +1,11 @@
 import json
+
 import pytest
 
 from src.dashboard_results import (
-    load_result_summary,
-    is_comparable_run,
     fingerprint_test_data,
+    is_comparable_run,
+    load_result_summary,
 )
 
 

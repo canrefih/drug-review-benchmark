@@ -3,10 +3,10 @@ from pathlib import Path
 
 from src.experiment import run_benchmark
 from src.report import (
-    show_report,
     show_class_report,
     show_confusion_matrix,
     show_errors,
+    show_report,
 )
 
 

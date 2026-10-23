@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import platform
 import sys
 import uuid
@@ -14,17 +13,16 @@ import yaml
 from joblib import dump
 from sklearn.model_selection import train_test_split
 
+from src.dashboard_results import fingerprint_test_data
 from src.data import (
     load_tsv,
+    make_clean_unseen_test,
+    make_holdout,
     prepare_frame,
     sha256_file,
-    make_holdout,
-    make_clean_unseen_test,
 )
 from src.metrics import evaluate, write_json
 from src.models import build_models
-
-from src.dashboard_results import fingerprint_test_data
 
 
 def load_config(path: str | Path) -> dict:
@@ -90,7 +88,7 @@ def run_benchmark(config_path: str | Path) -> Path:
     best_name, best_macro_f1 = None, -1.0
     full_models = {}
 
-    for model_name, model_template in models.items():
+    for model_name in models:
         # Evaluate a single full-data fit and save that model for inference.
         model = build_models(config)[model_name]
         model.fit(x_train, y_train)
@@ -141,8 +139,8 @@ def run_benchmark(config_path: str | Path) -> Path:
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "config": config,
         "evaluation_source": evaluation_source,
-        "train_rows_after_filtering": int(len(fit_frame)),
-        "evaluation_rows_after_filtering": int(len(eval_frame)),
+        "train_rows_after_filtering": len(fit_frame),
+        "evaluation_rows_after_filtering": len(eval_frame),
         "classes": labels,
         "best_model_by_macro_f1": best_name,
         "dataset_hashes": {"train": sha256_file(train_path), "test": sha256_file(test_path) if test_path.exists() else None},

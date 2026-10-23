@@ -4,8 +4,8 @@ import json
 import pandas as pd
 import yaml
 
-from src.data import prepare_frame, make_clean_unseen_test
 from src.dashboard_results import fingerprint_test_data
+from src.data import make_clean_unseen_test, prepare_frame
 
 
 def main():

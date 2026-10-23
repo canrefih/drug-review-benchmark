@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
-from typing import Any
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -101,10 +100,10 @@ def make_clean_unseen_test(
     clean_test = test.loc[~overlap_mask].copy()
 
     stats = {
-        "test_rows_before_cleaning": int(len(test_frame)),
+        "test_rows_before_cleaning": len(test_frame),
         "ambiguous_test_rows_removed": ambiguous_rows,
         "overlapping_test_rows_removed": overlap_rows,
-        "clean_test_rows": int(len(clean_test)),
+        "clean_test_rows": len(clean_test),
     }
 
     return clean_test.drop(columns=["_review_key"]), stats
